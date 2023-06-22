@@ -1,70 +1,45 @@
-# Getting Started with Create React App
+영화 트레일러 오픈 API를 활용하여 영화 목록을 조회하고 사이트 구현하기
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+아래 주소를 참고하여 영화 트레일러 API 만들기
 
-## Available Scripts
+[https://developers.themoviedb.org/3/movies/get-movie-videos](https://developers.themoviedb.org/3/movies/get-movie-details)
 
-In the project directory, you can run:
+- API Key를 발급 받아야 사용할 수 있음
 
-### `npm start`
+1. **react-qurey를 사용하여 데이터를 캐싱할 것**
+2. **로딩 중에는 목록 가장 하단 부에 skelton UI를 나타낼 것**
+3. **목록을 불러올 때는 react-query의 useInfinitQuery를 사용하여 무한 스크롤링으로 불러울 것**
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- https://tanstack.com/query/v4/docs/react/reference/useInfiniteQuery
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+1. **페이지 구성**
+   1. home page
+      - 사용 API: /movie/popular
+      - 각 영화의 평점 및 짧은 미리보기(소개)가 나타나야함
+      - 미리보기는 길이가 길다면 특정 글자 수를 넘어가면 … 으로 표시할 수 있도록 UI를 고려할 것
+   2. now playing page
+      - 사용 API: /movie/now_playing
+   3. upcoming page
+      - 사용 API: /movie/upcoming
+   4. top-rated pag
+      - 사용 API: /movie/top_rated
+   5. 영화 상세 페이지
+      - 사용 API: /movie/{movie_id}
+   6. 검색 결과 페이지
+      - 사용 API: /search/movie
+2. **스크롤 감지하여 ScrollUp button 표시되도록, 누를 시 최상단으로 스크롤 이동**
+3. **favicon을 이용하여 웹 표시 아이콘을 수정할 것**
 
-### `npm test`
+4. **페이지 별 구현 사항**
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- movies / 리스트 페이지
+  - 한번 당 가져올 데이터 최대 20
+  - 제목, 포스터, 미리보기(소개), 별점 표시
+  - 포스터 없는 경우, 대체 이미지 사용
+- movie / 상세 페이지
+  - 비디오 있는 경우, 페이지 진입 시 자동으로 비디오 플레이
+  - 제목, 포스터, 별점, 제작 연도, 장르 데이터 활용해서 UI 표기
+  - 그 외의 데이터 추가 활용 여부는 자유
+- search
+  - 제목, 포스터, 미리보기(소개), 별점
+  - 포스터 없는 경우, 대체 이미지 사용
