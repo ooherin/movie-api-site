@@ -4,12 +4,11 @@ import styled from "styled-components";
 const MovieList = ({ data }) => {
   return (
     <Wrapper>
-      <Title>무비 차트</Title>
       <List>
         {data &&
           data.map((movieList) => {
-            return movieList.map((movie) => {
-              return <OneMovie key={movie.id} movie={movie} />;
+            return movieList.map((movie, index) => {
+              return <OneMovie key={movie.id} movie={movie} index={index} />;
             });
           })}
       </List>
@@ -29,10 +28,4 @@ const List = styled.div`
 const Wrapper = styled.div`
   margin-left: 20px;
   margin-right: 20px;
-`;
-const Title = styled.div`
-  font-size: 30px;
-  font-weight: 700;
-  border-bottom: 0.2rem solid black;
-  padding-bottom: 10px;
 `;

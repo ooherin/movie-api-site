@@ -14,7 +14,10 @@ const MovieApi = {
     });
   },
   getOneMovie(movie_id) {
-    return axiosInstance.get(`/movie/${movie_id}?language=ko-KR`);
+    return axiosInstance.get(
+      `/movie/${movie_id}?language=ko-KR&append_to_response=videos`
+      //&append_to_response=videos
+    );
   },
 };
 

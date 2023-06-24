@@ -3,10 +3,13 @@ import MovieApi from "../../apis/movie.api";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useEffect, useRef, useCallback, useState } from "react";
 import { useParams } from "react-router-dom";
+import styled from "styled-components";
+import SimpleSlider from "../../components/@common/ImgSlider";
 
 const MainPage = () => {
   const params = useParams();
   const type = params.type || "popular";
+  const [sort, setSort] = useState(null);
 
   const getMovie = async (page) => {
     try {
@@ -16,6 +19,16 @@ const MainPage = () => {
       console.log(err);
     }
   };
+
+  useEffect(() => {
+    type === "popular"
+      ? setSort("인기순")
+      : type === "now_playing"
+      ? setSort("현재 상영작")
+      : type === "top_rated"
+      ? setSort("평점 높은순")
+      : setSort("개봉 예정작");
+  }, [type]);
 
   const {
     status,
@@ -63,6 +76,10 @@ const MainPage = () => {
     <div>Error occurred while fetching data</div>
   ) : (
     <>
+      <SimpleSlider data={data} />
+      {/* <MovieBanner data={data} /> */}
+      <Padding />
+      <Title>{sort}</Title>
       {data && isSuccess && <MovieList data={data.pages} />}
       <div className="loader" ref={observerElem}>
         {isFetchingNextPage && hasNextPage ? "Loading..." : "No search left"}
@@ -72,3 +89,19 @@ const MainPage = () => {
 };
 
 export default MainPage;
+
+const Title = styled.div`
+  font-size: 30px;
+  font-weight: 700;
+  border-bottom: 0.16rem solid black;
+  padding-bottom: 10px;
+  padding-left: 30px;
+  padding-top: 5px;
+`;
+
+const Padding = styled.div`
+  height: 100px;
+  background: linear-gradient(to bottom, #666, white);
+`;
+
+//useObserver
