@@ -41,18 +41,3 @@ const Wrapper = styled.div`
   margin-left: 20px;
   margin-right: 20px;
 `;
-
-// {data &&
-//   data.map((movieList, index) => {
-//     console.log("asfasf", movieList);
-//     const movieListIdx = index;
-//     if (searchParams.length !== 1) {
-//       return movieList.map((movie, index) => (
-//         <OneMovie
-//           key={movie.id}
-//           movie={movie}
-//           index={index}
-//           movieListIdx={movieListIdx}
-//         />
-//       ));
-//     } else {

@@ -1,7 +1,7 @@
 import MovieApi from "../../apis/movie.api";
 import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import MovieList from "../main/MovieList";
+import MovieList from "../../components/@common/MovieList";
 
 const SearchPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();

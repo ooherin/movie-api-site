@@ -9,18 +9,6 @@ const MovieBanner = () => {
   const [ImgArr, setImgArr] = useState([]);
   const { data } = usePopular(1);
 
-  // const getMovie = async (page) => {
-  //   try {
-  //     const res = await MovieApi.getMovies(1, "popular");
-  //     return res.data.results;
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
-
-  // const { data, status } = useQuery(["popular"], getMovie);
-  // console.log("data", data);
-
   useEffect(() => {
     if (data) {
       const sliced = data.slice(0, 3);

@@ -1,4 +1,4 @@
-import MovieList from "./MovieList";
+import MovieList from "../../components/@common/MovieList";
 import MovieApi from "../../apis/movie.api";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useEffect, useRef, useCallback, useState } from "react";
@@ -77,7 +77,6 @@ const MainPage = () => {
   ) : (
     <>
       <SimpleSlider data={data} />
-      {/* <MovieBanner data={data} /> */}
       <Padding />
       <Title>{sort}</Title>
       {data && isSuccess && <MovieList data={data.pages} search={false} />}
@@ -101,7 +100,4 @@ const Title = styled.div`
 
 const Padding = styled.div`
   height: 100px;
-  /* background: linear-gradient(to bottom, #666, white); */
 `;
-
-//useObserver
