@@ -1,7 +1,5 @@
 import ImageSlider from "../../components/@common/ImageSlider";
 import styled from "styled-components";
-import MovieApi from "../../apis/movie.api";
-import { useQuery } from "@tanstack/react-query";
 import { useState, useEffect } from "react";
 import usePopular from "../../hooks/usePopular";
 
