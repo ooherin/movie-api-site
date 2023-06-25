@@ -16,8 +16,12 @@ const MovieApi = {
   getOneMovie(movie_id) {
     return axiosInstance.get(
       `/movie/${movie_id}?language=ko-KR&append_to_response=videos`
-      //&append_to_response=videos
     );
+  },
+  getSearch(params) {
+    return axiosInstance.get("/search/movie?language=ko-KR", {
+      params,
+    });
   },
 };
 

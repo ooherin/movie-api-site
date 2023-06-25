@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import RatingStar from "./RatingStar";
 
 const OneMovie = ({ movie, index }) => {
+  console.log("moveimovie", movie);
   const params = useParams();
   const [sort, setSort] = useState(null);
   const { id } = movie;
@@ -33,7 +34,6 @@ const OneMovie = ({ movie, index }) => {
       <Img src={`${imgUrl}${movie.poster_path}`} />
       <Detail>
         <Title>{movie.title}</Title>
-        {/* <div>{movie.vote_average}</div> */}
         <RatingStar score={movie.vote_average} />
       </Detail>
     </Wrapper>

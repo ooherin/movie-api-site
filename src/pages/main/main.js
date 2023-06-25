@@ -80,7 +80,7 @@ const MainPage = () => {
       {/* <MovieBanner data={data} /> */}
       <Padding />
       <Title>{sort}</Title>
-      {data && isSuccess && <MovieList data={data.pages} />}
+      {data && isSuccess && <MovieList data={data.pages} search={false} />}
       <div className="loader" ref={observerElem}>
         {isFetchingNextPage && hasNextPage ? "Loading..." : "No search left"}
       </div>
@@ -101,7 +101,7 @@ const Title = styled.div`
 
 const Padding = styled.div`
   height: 100px;
-  background: linear-gradient(to bottom, #666, white);
+  /* background: linear-gradient(to bottom, #666, white); */
 `;
 
 //useObserver

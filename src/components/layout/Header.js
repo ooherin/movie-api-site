@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { CiSearch } from "react-icons/ci";
+import SearchBar from "../@common/SearchBar";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -41,6 +43,7 @@ const Header = () => {
       >
         개봉 예정작
       </Text>
+      <SearchBar />
     </Wrapper>
   );
 };
@@ -48,7 +51,7 @@ export default Header;
 
 const Wrapper = styled.div`
   width: 100%;
-  height: 60px;
+  height: 100px;
   background-color: ${({ theme }) => theme.PALLETE.red};
   display: flex;
   justify-content: space-around;

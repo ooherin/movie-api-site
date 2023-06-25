@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import MovieApi from "../../apis/movie.api";
 import { useQuery } from "@tanstack/react-query";
-import ImageSlider from "../../components/@common/ImageSlider";
 
 const DetailPage = () => {
   const params = useParams();
@@ -18,7 +17,7 @@ const DetailPage = () => {
   };
 
   const { data, status, isSuccess } = useQuery(["detail"], getDetail);
-  const videoUrl = `https://www.youtube.com/embed/${data?.data?.videos?.results[0].key}`;
+  const videoUrl = `https://www.youtube.com/embed/${data?.data?.videos?.results[0]?.key}`;
   const imgUrl = process.env.REACT_APP_IMG_BASIC_URL;
   console.log(data);
 
@@ -52,8 +51,6 @@ const DetailPage = () => {
           allowFullScreen
           autoPlay // 자동 재생을 위해 autoplay 속성 추가
         ></iframe>
-        {/* <BackImg src={`${imgUrl}${data.data.backdrop_path}`} /> */}
-        {/* <ImageSlider /> */}
       </Wrapper>
     )
   );
@@ -69,7 +66,7 @@ const Wrapper = styled.div`
   justify-content: center;
   margin: 0 auto;
   padding-bottom: 100px;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), transparent),
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), transparent),
     url(${(props) => props.imgUrl + props.backdropPath});
   background-size: cover;
   background-repeat: no-repeat;
@@ -93,10 +90,6 @@ const Info = styled.div`
   width: 80%;
   justify-content: space-evenly;
   margin-bottom: 50px;
-`;
-
-const BackImg = styled.img`
-  width: 100%;
 `;
 
 const Img = styled.img`
