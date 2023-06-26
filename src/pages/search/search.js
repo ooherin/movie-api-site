@@ -2,8 +2,8 @@ import MovieApi from "../../apis/movie.api";
 import { useSearchParams } from "react-router-dom";
 import MovieList from "../../components/@common/MovieList";
 import { useQuery } from "@tanstack/react-query";
-import NoDataPage from "../fetchingPage/noData";
-import LoadingPage from "../fetchingPage/loading";
+import NoDataPage from "../fetching/noData";
+import LoadingPage from "../fetching/loading";
 import ErrorPage from "../error/error";
 
 const SearchPage = () => {
@@ -19,10 +19,7 @@ const SearchPage = () => {
     }
   };
 
-  const { data, status, isSuccess } = useQuery(
-    ["detail", keyword],
-    onSearchKeyword
-  );
+  const { data, status } = useQuery(["detail", keyword], onSearchKeyword);
 
   return status === "loading" ? (
     <LoadingPage />

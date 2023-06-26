@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import MovieApi from "../../apis/movie.api";
 import { useQuery } from "@tanstack/react-query";
-import LoadingPage from "../fetchingPage/loading";
+import LoadingPage from "../fetching/loading";
 import ErrorPage from "../error/error";
 
 const DetailPage = () => {

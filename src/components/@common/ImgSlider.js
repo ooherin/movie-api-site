@@ -3,8 +3,10 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import React from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 export const SimpleSlider = ({ data }) => {
+  const navigate = useNavigate();
   console.log("slidedataa", data);
   const slicedData = data?.slice(0, 5);
   const imgUrl = process.env.REACT_APP_IMG_BASIC_URL;
@@ -18,13 +20,21 @@ export const SimpleSlider = ({ data }) => {
     autoplay: true, // 자동 재생 활성화
     autoplaySpeed: 3000, // 슬라이드 간의 시간 간격 (ms)
   };
+
+  const onMoveDetailPage = (id) => {
+    navigate(`/detail/${id}`);
+  };
   return (
     <Wrapper>
       <Slider {...settings}>
         {slicedData &&
           slicedData.map((data) => {
             return (
-              <OneSlide>
+              <OneSlide
+                onClick={() => {
+                  onMoveDetailPage(data.id);
+                }}
+              >
                 <Image src={`${imgUrl}${data.backdrop_path}`} />
                 <Title>{data.title}</Title>
                 <OverView>{data.overview}</OverView>

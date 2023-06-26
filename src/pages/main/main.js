@@ -7,8 +7,8 @@ import SimpleSlider from "../../components/@common/ImgSlider";
 import { movieState } from "../../atoms/Movie.atom";
 import { useRecoilState } from "recoil";
 import useInfinite from "../../hooks/useInfinite";
-import LoadingPage from "../fetchingPage/loading";
-import NoDataPage from "../fetchingPage/noData";
+import LoadingPage from "../fetching/loading";
+import NoDataPage from "../fetching/noData";
 import ErrorPage from "../error/error";
 
 const MainPage = () => {
