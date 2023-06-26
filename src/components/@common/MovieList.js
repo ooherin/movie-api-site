@@ -1,24 +1,15 @@
 import React from "react";
 import OneMovie from "../../components/@common/OneMovie";
 import styled from "styled-components";
-import { useSearchParams } from "react-router-dom";
-import { useState, useEffect } from "react";
 
-const MovieList = ({ data, search }) => {
+const MovieList = ({ data }) => {
   console.log("data", data);
-  const [searchParams, setSearchParams] = useSearchParams();
-  console.log("asfd", searchParams);
-  const [movies, setMovies] = useState([]);
-
-  useEffect(() => {
-    search ? setMovies(data) : setMovies((prev) => [...prev, ...data.flat()]);
-  }, [data]);
 
   return (
-    movies && (
+    data && (
       <Wrapper>
         <List>
-          {movies.map((movie, index) => {
+          {data.map((movie, index) => {
             return <OneMovie key={movie.id} movie={movie} index={index} />;
           })}
         </List>

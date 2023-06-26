@@ -1,30 +1,37 @@
 import MovieApi from "../../apis/movie.api";
 import { useSearchParams } from "react-router-dom";
-import { useEffect, useState } from "react";
 import MovieList from "../../components/@common/MovieList";
+import { useQuery } from "@tanstack/react-query";
+import NoDataPage from "../fetchingPage/noData";
+import LoadingPage from "../fetchingPage/loading";
+import ErrorPage from "../error/error";
 
 const SearchPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [searchResult, setSearchResult] = useState(null);
   const keyword = searchParams.get("keyword");
 
-  useEffect(() => {
-    const res = onSearchKeyword(keyword);
-    console.log(searchResult);
-  }, [searchParams]);
-
-  const onSearchKeyword = async (keyword) => {
+  const onSearchKeyword = async () => {
     try {
       const res = await MovieApi.getSearch({ query: keyword });
-      setSearchResult(res.data.results);
-      return res;
+      return res.data.results;
     } catch (err) {
       console.log(err);
     }
   };
 
-  return (
-    searchResult && <MovieList data={Array.from(searchResult)} search={true} />
+  const { data, status, isSuccess } = useQuery(
+    ["detail", keyword],
+    onSearchKeyword
+  );
+
+  return status === "loading" ? (
+    <LoadingPage />
+  ) : status === "error" ? (
+    <ErrorPage />
+  ) : data.length > 0 ? (
+    <MovieList search={true} data={data} />
+  ) : (
+    <NoDataPage />
   );
 };
 export default SearchPage;

@@ -6,7 +6,6 @@ import { useState, useEffect } from "react";
 import RatingStar from "./RatingStar";
 
 const OneMovie = ({ movie, index }) => {
-  console.log("moveimovie", movie);
   const params = useParams();
   const [sort, setSort] = useState(null);
   const { id } = movie;

@@ -1,7 +1,4 @@
-import axios from "axios";
 import { axiosInstance } from "./@core";
-
-// const queryConfig = { staleTime: 1000 * 60 * 5, cacheTime: 1000 * 60 * 4 };
 
 const apiConfig = {
   language: "ko-KR",
@@ -22,6 +19,9 @@ const MovieApi = {
     return axiosInstance.get("/search/movie?language=ko-KR", {
       params,
     });
+  },
+  getMovieReview(movie_id) {
+    return axiosInstance.get(`/movie/${movie_id}/reviews?language=ko-KR`);
   },
 };
 

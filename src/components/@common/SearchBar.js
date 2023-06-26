@@ -1,12 +1,10 @@
 import styled from "styled-components";
 import { CiSearch } from "react-icons/ci";
-import { useState, useEffect, useRef } from "react";
-import MovieApi from "../../apis/movie.api";
+import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 const SearchBar = () => {
-  const keywordInput = useRef();
   const [keyword, setKeyword] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
@@ -15,22 +13,23 @@ const SearchBar = () => {
     setKeyword(e.target.value);
   };
 
-  const onClickMoveSearch = () => {
+  const onClickMoveSearch = (e) => {
+    e.preventDefault();
     searchParams.set("keyword", keyword);
     navigate(`/search?keyword=${keyword}`);
-    keywordInput.current = "";
+    setKeyword("");
   };
 
   return (
-    <Wrapper>
-      <SearchInput onChange={onChange} value={keyword} ref={keywordInput} />
-      <CiSearch style={iconStyles} onClick={onClickMoveSearch} />
+    <Wrapper onSubmit={onClickMoveSearch}>
+      <SearchInput onChange={onChange} value={keyword} />
+      <CiSearch type="button" style={iconStyles} />
     </Wrapper>
   );
 };
 export default SearchBar;
 
-const Wrapper = styled.div`
+const Wrapper = styled.form`
   width: 150px;
   height: 25px;
   z-index: 1000;

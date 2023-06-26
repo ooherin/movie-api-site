@@ -5,8 +5,8 @@ import React from "react";
 import styled from "styled-components";
 
 export const SimpleSlider = ({ data }) => {
-  const slicedData = data.pages[0].slice(0, 5);
-  console.log(slicedData);
+  console.log("slidedataa", data);
+  const slicedData = data?.slice(0, 5);
   const imgUrl = process.env.REACT_APP_IMG_BASIC_URL;
 
   const settings = {
@@ -21,15 +21,16 @@ export const SimpleSlider = ({ data }) => {
   return (
     <Wrapper>
       <Slider {...settings}>
-        {slicedData.map((data) => {
-          return (
-            <OneSlide>
-              <Image src={`${imgUrl}${data.backdrop_path}`} />
-              <Title>{data.title}</Title>
-              <OverView>{data.overview}</OverView>
-            </OneSlide>
-          );
-        })}
+        {slicedData &&
+          slicedData.map((data) => {
+            return (
+              <OneSlide>
+                <Image src={`${imgUrl}${data.backdrop_path}`} />
+                <Title>{data.title}</Title>
+                <OverView>{data.overview}</OverView>
+              </OneSlide>
+            );
+          })}
       </Slider>
     </Wrapper>
   );
@@ -41,16 +42,6 @@ const Wrapper = styled.div``;
 
 const Image = styled.img`
   width: 100%;
-  /* background: linear-gradient(
-      to right,
-      rgba(20, 20, 20, 0) 10%,
-      rgba(20, 20, 20, 0.25) 25%,
-      rgba(20, 20, 20, 0.5) 50%,
-      rgba(20, 20, 20, 0.75) 75%,
-      rgba(20, 20, 20, 1) 100%
-    ),
-    /* url(${(props) => props.url}); */
-    ru */
 `;
 
 const Title = styled.div`

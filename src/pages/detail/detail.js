@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import MovieApi from "../../apis/movie.api";
 import { useQuery } from "@tanstack/react-query";
+import LoadingPage from "../fetchingPage/loading";
+import ErrorPage from "../error/error";
 
 const DetailPage = () => {
   const params = useParams();
@@ -19,16 +21,14 @@ const DetailPage = () => {
   const { data, status, isSuccess } = useQuery(["detail"], getDetail);
   const videoUrl = `https://www.youtube.com/embed/${data?.data?.videos?.results[0]?.key}`;
   const imgUrl = process.env.REACT_APP_IMG_BASIC_URL;
-  console.log(data);
-
   return status === "loading" ? (
-    <div>Loading...</div>
+    <LoadingPage />
   ) : status === "error" ? (
-    <div>Error occurred while fetching data</div>
+    <ErrorPage />
   ) : (
     data &&
     isSuccess && (
-      <Wrapper imgUrl={imgUrl} backdropPath={data.data.backdrop_path}>
+      <Wrapper imgUrl={imgUrl} backdropPath={data?.data?.backdrop_path}>
         <Title>{data.data.title}</Title>
         <Info>
           <Img src={`${imgUrl}${data.data.poster_path}`} />
