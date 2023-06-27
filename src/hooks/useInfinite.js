@@ -15,9 +15,11 @@ const useInfinite = (getMovie, type) => {
     isFetchingNextPage,
     fetchNextPage,
   } = useInfiniteQuery(
+    //의존성 배열로 type 추가
     ["popular", type],
     ({ pageParam = 1 }) => getMovie(pageParam),
     {
+      //nextPage를 리턴하는 getNextPageParam
       getNextPageParam: (lastPage, allPages) => {
         const nextPage = allPages.length + 1;
         return nextPage > lastPage.length ? undefined : nextPage;
@@ -30,7 +32,6 @@ const useInfinite = (getMovie, type) => {
   useEffect(() => {
     const currentData = data?.pages.flat();
     setMovie(currentData);
-    console.log("movie", movie);
   }, [data, setMovie]);
 
   return {
